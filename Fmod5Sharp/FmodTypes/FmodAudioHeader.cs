@@ -90,6 +90,12 @@ namespace Fmod5Sharp.FmodTypes
 						sampleMetadata.FrequencyId = fcd.ActualFrequencyId;
 					}
 
+					if (chunks.First(c => c.ChunkType == FmodSampleChunkType.LOOP) is {ChunkData: LoopChunkData lcd})
+					{
+						sampleMetadata.loopStartMarker = lcd.LoopStart;
+						sampleMetadata.loopEndMarker = lcd.LoopEnd;
+					}
+
 					sampleMetadata.Chunks = chunks;
 				
 					Samples.Add(sampleMetadata);

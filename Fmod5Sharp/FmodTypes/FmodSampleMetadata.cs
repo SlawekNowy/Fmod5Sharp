@@ -12,11 +12,19 @@ namespace Fmod5Sharp.FmodTypes
 		internal List<FmodSampleChunk> Chunks = new();
 		internal int NumChannels;
 
+		internal uint loopStartMarker;
+
+		internal uint loopEndMarker;
+
 		public bool IsStereo;
 		public ulong SampleCount;
 
 		public int Frequency => FsbLoader.Frequencies.TryGetValue(FrequencyId, out var actualFrequency) ? actualFrequency : (int)FrequencyId; //If set by FREQUENCY chunk, id is actual frequency
 		public uint Channels => (uint)NumChannels;
+
+		public uint loopStart => loopStartMarker;
+
+		public uint loopEnd => loopEndMarker;
 
 		void IBinaryReadable.Read(BinaryReader reader)
 		{
